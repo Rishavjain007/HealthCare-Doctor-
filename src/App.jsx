@@ -5,7 +5,8 @@ import Sidebar from "./Components/Sidebar.jsx";
 import Topbar from "./Components/Topbar.jsx";
 import NotificationOffcanvas from "./Components/NotificationOffcanvas.jsx";
 import Footer from "./Components/Footer.jsx";
-import Dashbord from "./Pages/Dashbord.jsx";
+import Profilesettings from "./Pages/Profilesettings.jsx";
+import ScheduleTiming from "./Pages/ScheduleTiming.jsx";
 
 function App() {
   // Theme state
@@ -87,7 +88,12 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Route path="/" element={<Dashbord />} />
+                  <Route path="/" element={<h2>Dashboard</h2>} />
+                  <Route
+                    path="/profile-settings"
+                    element={<Profilesettings />}
+                  />
+                  <Route path="/schedule-timing" element={<ScheduleTiming />} />
                 </Routes>
               </main>
               {/* Footer */}
