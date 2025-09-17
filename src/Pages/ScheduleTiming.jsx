@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import ThemeContext from "./ThemeContext.jsx";
+import ThemeContext from "../Components/ThemeContext.jsx";
 import {
   addMonths,
   subMonths,

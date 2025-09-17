@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import ThemeContext from "./ThemeContext.jsx";
+import ThemeContext from "../Components/ThemeContext.jsx";
 
 const Profilesettings = () => {
   const { isDarkMode, colors } = useContext(ThemeContext);
