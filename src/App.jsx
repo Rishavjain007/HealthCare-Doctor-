@@ -5,14 +5,17 @@ import Sidebar from "./Components/Sidebar.jsx";
 import Topbar from "./Components/Topbar.jsx";
 import NotificationOffcanvas from "./Components/NotificationOffcanvas.jsx";
 import Footer from "./Components/Footer.jsx";
-import Profilesettings from "./Pages/Profilesettings.jsx";
-import ScheduleTiming from "./Pages/ScheduleTiming.jsx";
+import Dashbord from "./Pages/Dashbord.jsx";
 
 function App() {
+  // Theme state
   const [isDarkMode, setIsDarkMode] = useState(false);
+  // Sidebar open state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // Notification offcanvas state
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
+  // Effect to apply dark mode class
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -21,23 +24,27 @@ function App() {
     }
   }, [isDarkMode]);
 
+  // Theme-related settings
+  const colors = {
+    primary: "#396CF0",
+    lightBg: "#ffffff",
+    lightCard: "#f0f4ff",
+    lightText: "#000000",
+    darkBg: "#1C2836",
+    darkCard: "#1a1a1a",
+    darkText: "#ffffff",
+  };
+
   const theme = {
     isDarkMode,
     toggleTheme: () => setIsDarkMode((prev) => !prev),
     isSidebarOpen,
     toggleSidebar: () => setIsSidebarOpen((prev) => !prev),
     closeSidebar: () => setIsSidebarOpen(false),
-    colors: {
-      primary: "#396CF0",
-      lightBg: "#ffffff",
-      lightCard: "#f0f4ff",
-      lightText: "#000000",
-      darkBg: "#1C2836",
-      darkCard: "#1a1a1a",
-      darkText: "#ffffff",
-    },
+    colors,
   };
 
+  // Notification handlers
   const toggleNotification = () => {
     setIsNotificationOpen((prev) => !prev);
   };
@@ -51,7 +58,10 @@ function App() {
       message: "New appointment scheduled",
       time: "01:16 AM IST, Sep 13, 2025",
     },
-    { message: "System update available", time: "11:30 PM IST, Sep 12, 2025" },
+    {
+      message: "System update available",
+      time: "11:30 PM IST, Sep 12, 2025",
+    },
   ];
 
   return (
@@ -59,17 +69,23 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen">
           <div className="flex flex-1 relative">
-            {/* Sidebar - Fixed on desktop, hidden/slidable on mobile */}
+            {/* Sidebar */}
             <Sidebar />
             <div className="flex flex-col flex-1 w-full md:ml-64">
-              {/* Topbar - Full width */}
+              {/* Topbar */}
               <Topbar
                 toggleNotification={toggleNotification}
                 toggleSidebar={theme.toggleSidebar}
                 toggleTheme={theme.toggleTheme}
               />
-              {/* Main content - Adjustable margin and full width */}
-              <main className="flex-grow p-4">
+              {/* Main content area */}
+              <main
+                className="flex-grow p-4 transition-colors duration-300"
+                style={{
+                  backgroundColor: isDarkMode ? colors.darkBg : colors.lightBg,
+                  color: isDarkMode ? colors.darkText : colors.lightText,
+                }}
+              >
                 <Routes>
                   <Route path="/" element={<h2>Dashboard</h2>} />
                   <Route
@@ -79,9 +95,10 @@ function App() {
                   <Route path="/schedule-timing" element={<ScheduleTiming />} />
                 </Routes>
               </main>
-              {/* Footer - Full width */}
+              {/* Footer */}
               <Footer />
             </div>
+            {/* Notification Offcanvas */}
             <NotificationOffcanvas
               isOpen={isNotificationOpen}
               onClose={closeNotification}
