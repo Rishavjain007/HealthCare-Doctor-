@@ -15,21 +15,24 @@ import Signup from "./Pages/Signup.jsx";
 function App() {
   // Theme state
   const [isDarkMode, setIsDarkMode] = useState(false);
-  // Sidebar open state
+
+  // Sidebar state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  // Notification offcanvas state
+
+  // Notification Offcanvas state
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
-  // Effect to apply dark mode class
+  // Apply dark mode class to <html>
   useEffect(() => {
+    const root = document.documentElement;
     if (isDarkMode) {
-      document.documentElement.classList.add("dark");
+      root.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
     }
   }, [isDarkMode]);
 
-  // Theme-related settings
+  // Theme colors
   const colors = {
     primary: "#396CF0",
     lightBg: "#ffffff",
@@ -40,6 +43,7 @@ function App() {
     darkText: "#ffffff",
   };
 
+  // Theme context object
   const theme = {
     isDarkMode,
     toggleTheme: () => setIsDarkMode((prev) => !prev),
@@ -50,14 +54,13 @@ function App() {
   };
 
   // Notification handlers
-  const toggleNotification = () => {
+  const toggleNotification = () =>
     setIsNotificationOpen((prev) => !prev);
-  };
 
-  const closeNotification = () => {
-    if (isNotificationOpen) setIsNotificationOpen(false);
-  };
+  const closeNotification = () =>
+    setIsNotificationOpen(false);
 
+  // Dummy notification items
   const notificationItems = [
     {
       message: "New appointment scheduled",
@@ -66,6 +69,10 @@ function App() {
     {
       message: "System update available",
       time: "11:30 PM IST, Sep 12, 2025",
+    },
+    {
+      message: "Profile updated successfully",
+      time: "07:45 PM IST, Sep 10, 2025",
     },
   ];
 
@@ -76,6 +83,8 @@ function App() {
           <div className="flex flex-1 relative">
             {/* Sidebar */}
             <Sidebar />
+
+            {/* Content Area */}
             <div className="flex flex-col flex-1 w-full md:ml-64">
               {/* Topbar */}
               <Topbar
@@ -83,23 +92,29 @@ function App() {
                 toggleSidebar={theme.toggleSidebar}
                 toggleTheme={theme.toggleTheme}
               />
-              {/* Main content area */}
-              <main className="flex-grow transition-colors duration-300">
+
+              {/* Main content */}
+              <main className="flex-grow transition-colors duration-300 bg-lightBg dark:bg-darkBg">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route
                     path="/profile-settings"
                     element={<Profilesettings />}
                   />
-                  <Route path="/schedule-timing" element={<ScheduleTiming />} />
+                  <Route
+                    path="/schedule-timing"
+                    element={<ScheduleTiming />}
+                  />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/recover" element={<RecoverAccount />} />
                 </Routes>
               </main>
+
               {/* Footer */}
               <Footer />
             </div>
+
             {/* Notification Offcanvas */}
             <NotificationOffcanvas
               isOpen={isNotificationOpen}
