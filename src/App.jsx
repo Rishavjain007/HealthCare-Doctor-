@@ -11,6 +11,8 @@ import Dashboard from "./Pages/Dashbord.jsx";
 import RecoverAccount from "./Pages/RecoverAccount.jsx";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
+import Appointment from "./Pages/Appointment.jsx";
+import ChatUI from "./Pages/Chat.jsx";
 
 function App() {
   // Theme state
@@ -54,11 +56,9 @@ function App() {
   };
 
   // Notification handlers
-  const toggleNotification = () =>
-    setIsNotificationOpen((prev) => !prev);
+  const toggleNotification = () => setIsNotificationOpen((prev) => !prev);
 
-  const closeNotification = () =>
-    setIsNotificationOpen(false);
+  const closeNotification = () => setIsNotificationOpen(false);
 
   // Dummy notification items
   const notificationItems = [
@@ -101,13 +101,12 @@ function App() {
                     path="/profile-settings"
                     element={<Profilesettings />}
                   />
-                  <Route
-                    path="/schedule-timing"
-                    element={<ScheduleTiming />}
-                  />
+                  <Route path="/schedule-timing" element={<ScheduleTiming />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/recover" element={<RecoverAccount />} />
+                  <Route path="/appointment" element={<Appointment />} />
+                  <Route path="/chat" element={<ChatUI />} />
                 </Routes>
               </main>
 
