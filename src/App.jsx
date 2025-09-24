@@ -7,6 +7,10 @@ import NotificationOffcanvas from "./Components/NotificationOffcanvas.jsx";
 import Footer from "./Components/Footer.jsx";
 import Profilesettings from "./Pages/Profilesettings.jsx";
 import ScheduleTiming from "./Pages/ScheduleTiming.jsx";
+import Dashboard from "./Pages/Dashbord.jsx";
+import RecoverAccount from "./Pages/RecoverAccount.jsx";
+import Login from "./Pages/Login.jsx";
+import Signup from "./Pages/Signup.jsx";
 
 function App() {
   // Theme state
@@ -80,20 +84,17 @@ function App() {
                 toggleTheme={theme.toggleTheme}
               />
               {/* Main content area */}
-              <main
-                className="flex-grow p-4 transition-colors duration-300"
-                style={{
-                  backgroundColor: isDarkMode ? colors.darkBg : colors.lightBg,
-                  color: isDarkMode ? colors.darkText : colors.lightText,
-                }}
-              >
+              <main className="flex-grow transition-colors duration-300">
                 <Routes>
-                  <Route path="/" element={<h2>Dashboard</h2>} />
+                  <Route path="/" element={<Dashboard />} />
                   <Route
                     path="/profile-settings"
                     element={<Profilesettings />}
                   />
                   <Route path="/schedule-timing" element={<ScheduleTiming />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/recover" element={<RecoverAccount />} />
                 </Routes>
               </main>
               {/* Footer */}
